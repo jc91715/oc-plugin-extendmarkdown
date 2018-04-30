@@ -3,6 +3,7 @@
 use Backend;
 use System\Classes\PluginBase;
 use RainLab\Blog\Controllers\Posts as PostController;
+use RainLab\Blog\FormWidgets\BlogMarkdown;
 /**
  * ExtendMarkDown Plugin Information File
  */
@@ -26,17 +27,25 @@ class Plugin extends PluginBase
 
     public function boot()
     {
-        \Event::listen('backend.page.beforeDisplay', function($controller, $action, $params) {
+//        \Event::listen('backend.page.beforeDisplay', function($controller, $action, $params) {
+//
+//            if($controller instanceof PostController){
+//                if(in_array($action,['create','update'])){
+//                    $controller->addJs('/plugins/jc91715/extendmarkdown/assets/js/paste.js');
+//                    $controller->addJs('/plugins/jc91715/extendmarkdown/assets/js/img_upload.js');
+//                    $controller->addJs('/plugins/jc91715/extendmarkdown/assets/js/init.js');
+//                }
+//            }
+//
+//        });
 
-            if($controller instanceof PostController){
-                if(in_array($action,['create','update'])){
-                    $controller->addJs('/plugins/jc91715/extendmarkdown/assets/js/paste.js');
-                    $controller->addJs('/plugins/jc91715/extendmarkdown/assets/js/img_upload.js');
-                    $controller->addJs('/plugins/jc91715/extendmarkdown/assets/js/init.js');
-                }
-            }
-
+        BlogMarkdown::extend(function($widget){
+                $widget->addJs('/plugins/jc91715/extendmarkdown/assets/js/paste.js');
+                $widget->addJs('/plugins/jc91715/extendmarkdown/assets/js/img_upload.js');
+                $widget->addJs('/plugins/jc91715/extendmarkdown/assets/js/init.js');
         });
+
+
     }
 
 
